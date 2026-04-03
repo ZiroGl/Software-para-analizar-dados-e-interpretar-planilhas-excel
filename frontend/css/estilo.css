@@ -9,7 +9,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(180deg, #2c2c2c 0%, #1a1a1a 100%);
+    background: linear-gradient(180deg, #141414 0%, #0c0c0c 100%);
     height: 100%;
 
 }
@@ -21,19 +21,66 @@ body {
     flex-direction: column;
     color: white;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: black;
     border-radius: 1rem;
+    border: 0.1rem solid #bb86fc;
     height: 40vh;
     width: 70vh;
     gap: 1rem;
 }
-.inputs-arquivos input[type="file"]::file-selector-button{
-    height: 2rem;
-    width: 10rem;
+
+.inputs-arquivos input[type="file"] {
+    opacity: 0;
+    /* Fica totalmente transparente */
+    width: 0.1px;
+    /* Quase sem largura */
+    height: 0.1px;
+    /* Quase sem altura */
+    position: absolute;
+    /* Tira do caminho dos outros elementos */
+    z-index: -1;
+    /* Coloca atrás de tudo */
+ 
+} 
+
+
+.arquivos {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #3a3a3a, #222);
+    /* Degradê cinza */
+    color: #bb86fc;
+    /* Roxo neon de destaque */
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.botoes button {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #025e09, #006d05);
+    /* Degradê cinza */
+    color: #ffffff;
+    /* Roxo neon de destaque */
+    border-radius: 8px;
+    font-weight: bold;
     border: none;
-    padding: 2vh;
-    background-color: rgb(0, 0, 83);
-    border-radius: 1rem;
-    color: transparent;
+    transition: 0.5s;
+}
+
+.arquivos:hover {
+    background: #444;
+    transform: translateY(-2px);
+    /* Efeito moderno de flutuar */
+}
+
+.botoes button:hover {
+    background: rgb(0, 41, 0);
+    transform: translateY(-2px);
+    /* Efeito moderno de flutuar */
 }
