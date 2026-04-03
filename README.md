@@ -1,0 +1,1 @@
+# Software-para-analizar-dados-e-interpretar-planilhas-excel
