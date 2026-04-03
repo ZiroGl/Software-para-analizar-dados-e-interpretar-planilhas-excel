@@ -1,0 +1,39 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.importar-arquivos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(180deg, #2c2c2c 0%, #1a1a1a 100%);
+    height: 100%;
+
+}
+
+.inputs-arquivos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    background-color: black;
+    border-radius: 1rem;
+    height: 40vh;
+    width: 70vh;
+    gap: 1rem;
+}
+.inputs-arquivos input[type="file"]::file-selector-button{
+    height: 2rem;
+    width: 10rem;
+    border: none;
+    padding: 2vh;
+    background-color: rgb(0, 0, 83);
+    border-radius: 1rem;
+    color: transparent;
+}
