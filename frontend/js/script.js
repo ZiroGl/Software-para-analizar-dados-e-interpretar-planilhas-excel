@@ -64,16 +64,11 @@ btnImportar.addEventListener("click", function () {
         method: 'POST',
         body: doctype
     })
-        .then(Response => Response.json())
+        .then(response => response.json())
         .then(resposta => {
-            if (resposta.status) {
-                alert(resposta.mensagem);
-            } else {
-                alert(resposta.mensagem);
-            }
         })
         .catch(error => {
-            alert(error.message);
+            alert(console.log(error));
         })
 
 });
