@@ -4,6 +4,51 @@ body {
     height: 100%;
 }
 
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#bb86fc, #c195f7);
+    border: 0.2rem solid#714f9b;
+    height: 5rem;
+    gap: 25rem;
+    font-family: monospace;
+    font-size: larger;
+    text-transform: uppercase;
+}
+
+.cabecalho a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 0rem 0rem 1.5rem #0c0c0c;
+}
+
+.area_mouse {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 10rem;
+    height: 100%;
+    z-index: 998;
+    cursor: pointer;
+}
+
+.area_mouse:hover~.conexoes,
+.conexoes:hover {
+    left: 0;
+}
+
+.conexoes {
+    position: fixed;
+    left: -10rem;
+    background: linear-gradient(#bb86fc, #c195f7);
+    border: 0.2rem solid#714f9b;
+    width: 10rem;
+    height: 100%;
+    transition: left 0.3s ease-in-out;
+    z-index: 999;
+}
+
 .importar-arquivos {
     display: flex;
     align-items: center;
@@ -41,8 +86,8 @@ body {
     /* Tira do caminho dos outros elementos */
     z-index: -1;
     /* Coloca atrás de tudo */
- 
-} 
+
+}
 
 
 .arquivos {

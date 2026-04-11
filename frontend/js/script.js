@@ -7,6 +7,27 @@ const excel = inputs[1];
 bancoDeDados.click();
 excel.click();
 
+//ANIMAÇÃO DA BARRA LATERAL
+const barraConexao = document.querySelector(".conexoes");
+const area_mouse = document.querySelector(".area_mouse");
+let tempo;
+
+const mostrarBarra = () => {
+    clearTimeout(tempo);
+    barraConexao.style.left = '0rem';
+}
+
+const esconderBarra = () => {
+    tempo = setTimeout(() => {
+        barraConexao.style.left = '-10rem';
+    }, 300);
+}
+
+area_mouse.addEventListener('mouseenter', mostrarBarra);
+area_mouse.addEventListener('mouseleave', esconderBarra);
+barraConexao.addEventListener('mouseenter', mostrarBarra);
+barraConexao.addEventListener('mouseleave', esconderBarra);
+//EVENTO DO BOTÃO IMPORTAR
 const btnImportar = document.getElementById("importar");
 
 btnImportar.addEventListener("click", function () {
