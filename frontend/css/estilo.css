@@ -2,6 +2,7 @@ html,
 body {
     margin: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 .cabecalho {
@@ -39,14 +40,21 @@ body {
 }
 
 .conexoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     position: fixed;
+    margin-top: 6rem;
     left: -10rem;
     background: linear-gradient(#bb86fc, #c195f7);
     border: 0.2rem solid#714f9b;
     width: 10rem;
-    height: 100%;
+    height: 90%;
     transition: left 0.3s ease-in-out;
     z-index: 999;
+    color: white;
+    text-shadow: 0rem 0rem 1.5rem #0c0c0c;
 }
 
 .importar-arquivos {

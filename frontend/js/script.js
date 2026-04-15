@@ -1,3 +1,46 @@
+//FUNCOES
+const mostrarBarra = () => {
+    clearTimeout(tempo);
+    barraConexao.style.left = '0rem';
+}
+
+const esconderBarra = () => {
+    tempo = setTimeout(() => {
+        barraConexao.style.left = '-10rem';
+    }, 300);
+}
+
+const inserirTextoBarra = () => {
+    const arquivoBanco = document.getElementById("banco");
+    const arquivoExcel = document.getElementById("arquivosExcel");
+    let labelBanco = document.getElementById("textoBanco");
+    let labelExcel = document.getElementById("textoExcel");
+
+    if (arquivoBanco.files.length > 0) {
+
+        labelBanco.value = arquivoBanco.files.name;
+        labelBanco.textContent = arquivoBanco.files.name;
+    }
+
+    if (arquivoExcel.files.length > 0) {
+        labelExcel.value = arquivoExcel.files.name;
+        labelExcel.textContent = arquivoExcel.files.name;
+    }
+}
+const limparTextoBarra = () => {
+    let labelBanco = document.getElementById("textoBanco");
+    let labelExcel = document.getElementById("textoExcel");
+
+    labelBanco.value = "";
+    labelBanco.textContent = "";
+
+    labelExcel.value = "";
+    labelExcel.textContent = "";
+
+}
+
+inserirTextoBarra();
+
 //DECLARAÇÃO DE VARIAVEIS DOS INPUTS
 var inputs = document.querySelectorAll("input");
 const bancoDeDados = inputs[0];
@@ -12,24 +55,12 @@ const barraConexao = document.querySelector(".conexoes");
 const area_mouse = document.querySelector(".area_mouse");
 let tempo;
 
-const mostrarBarra = () => {
-    clearTimeout(tempo);
-    barraConexao.style.left = '0rem';
-}
-
-const esconderBarra = () => {
-    tempo = setTimeout(() => {
-        barraConexao.style.left = '-10rem';
-    }, 300);
-}
-
 area_mouse.addEventListener('mouseenter', mostrarBarra);
 area_mouse.addEventListener('mouseleave', esconderBarra);
 barraConexao.addEventListener('mouseenter', mostrarBarra);
 barraConexao.addEventListener('mouseleave', esconderBarra);
 //EVENTO DO BOTÃO IMPORTAR
 const btnImportar = document.getElementById("importar");
-
 btnImportar.addEventListener("click", function () {
 
     const doctype = new FormData();
@@ -87,6 +118,10 @@ btnImportar.addEventListener("click", function () {
     })
         .then(response => response.json())
         .then(resposta => {
+            if (resposta.status) {
+                limparTextoBarra();
+                inserirTextoBarra();
+            }
         })
         .catch(error => {
             alert(console.log(error));
