@@ -1,8 +1,4 @@
 <?php
-$json = [
-    'status' => true,
-    'mensagem' => []
-];
 $exts = ['sql', 'csv', 'xlsx'];
 
 $config_pdo = [
@@ -10,7 +6,6 @@ $config_pdo = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false,
 ];
-$pdo = new PDO("mysql:host=localhost;", "root", "", $config_pdo);
 
 try {
     //VERIFICA SE O METODO DE REQUISICAO FOI POST
@@ -21,7 +16,8 @@ try {
     //VERIFICACAO DOS ARQUIVOS ENVIADOS PELO USUARIO
     $banco = $_FILES['banco'] ?? NULL;
     $excels = $_FILES['excel'] ?? NULL;
-    var_dump($excels['name'][0]);
+
+
 
     //VERiFiCAÇÃO DE EXTENÇÕES
     if ($banco !== NULL) {
@@ -30,6 +26,12 @@ try {
 
         ) {
             throw new Exception('O banco não é valido!' . $banco['name']);
+        }
+        try {
+            droparBanco("masterauto");
+            resturarSQL($banco);
+        } catch (PDOException $p) {
+            echo $p->getMessage();
         }
     }
     if ($excels !== NULL) {
@@ -46,20 +48,42 @@ try {
     echo $e->getMessage();
 }
 
+
+//FUNCOES
 function resturarSQL($banco)
 {
     try {
-        pathinfo($GLOBALS["banco"]["name"], PATHINFO_EXTENSION) === 'sql' or throw new Exception("O arquivo não é um SQL!");
+        $pdo = new PDO("mysql:host=localhost;", "root", "", $GLOBALS['config_pdo']);
 
-        $arquivo = file_get_contents($GLOBALS["banco"]['tmp_name']) or throw new Exception("Não foi possivel abrir o arquivo SQL");
+        pathinfo($banco["name"], PATHINFO_EXTENSION) === 'sql' or throw new Exception("O arquivo não é um SQL!");
+
+        $arquivo = file_get_contents($banco['tmp_name']) or throw new Exception("Não foi possivel abrir o arquivo SQL");
 
         $expl_estrutura = explode(';', $arquivo);
 
         foreach ($expl_estrutura as $comandos) {
-            if (strpos($comandos, '--') === 0) {
+            if (strpos($comandos, '--') === 0 or strpos($comandos, '*/') === 0) {
                 continue;
             }
+            $stmt = $pdo->prepare($comandos);
+            $stmt->execute();
         }
+
+        echo json_encode([
+            'status' => true,
+            'mensagem' => 'O banco de dados ' . $GLOBALS["banco"]["name"] . ' Foi restaurado!'
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function droparBanco($nome)
+{
+    try {
+        $pdo = new PDO("mysql:host=localhost;", "root", "", $GLOBALS['config_pdo']);
+        $query = "DROP DATABASE " . $nome . ";";
+        $pdo->query($query);
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

@@ -59,8 +59,10 @@ area_mouse.addEventListener('mouseenter', mostrarBarra);
 area_mouse.addEventListener('mouseleave', esconderBarra);
 barraConexao.addEventListener('mouseenter', mostrarBarra);
 barraConexao.addEventListener('mouseleave', esconderBarra);
-//EVENTO DO BOTÃO IMPORTAR
+
+//EVENTOS
 const btnImportar = document.getElementById("importar");
+
 btnImportar.addEventListener("click", function () {
 
     const doctype = new FormData();
